@@ -147,6 +147,7 @@ class OpenAIEmbedding(BaseTextEmbedding, OpenAILLMImpl):
         chunk_embeddings = chunk_embeddings / np.linalg.norm(chunk_embeddings)
         logging.debug(f"Final embedding: {chunk_embeddings.tolist()[:10]}...")
         return chunk_embeddings.tolist()
+    
     @retry(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=4, max=10))
     def _embed_with_retry(self, text: str | tuple, **kwargs: Any) -> tuple[list[float], int]:
         try:

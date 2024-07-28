@@ -1,3 +1,10 @@
+# source docs
+ragtest/*
+ragetest2/*
+*/processing/*/cache/
+*/processing/*/prompts/
+*/processing/*/output/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

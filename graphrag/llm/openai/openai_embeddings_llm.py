@@ -33,8 +33,13 @@ class OpenAIEmbeddingsLLM(BaseLLM[EmbeddingInput, EmbeddingOutput]):
             "model": self.configuration.model,
             **(kwargs.get("model_parameters") or {}),
         }
-        embedding = await self.client.embeddings.create(
-            input=input,
-            **args,
-        )
-        return [d.embedding for d in embedding.data]
+        # print("In Embedding for OpenAI")
+        try:
+            embedding = await self.client.embeddings.create(
+                input=input,
+                **args,
+            )
+            print(f"Returned from embedding with\n{embedding}", flush=True)
+            return [d.embedding for d in embedding.data]
+        except Exception as e:
+            return []
